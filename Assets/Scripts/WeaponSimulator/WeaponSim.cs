@@ -17,5 +17,12 @@ public class WeaponSim : MonoBehaviour
         knife.name = "Knife";
         knife.Use();
 
+        Weapon grenade = new Grenade();
+        grenade.name = "Grenade";
+        grenade.Use();
+
+        Weapon grenade2 = new Grenade(1, 10);
+        grenade2.name = "Grendade2";
+        grenade2.Use();
     }
 }

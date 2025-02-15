@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BS : MonoBehaviour
 {
-    public string playerName = "Hatdog";
-    public int playerHP = 50;
+    private string playerName = "Hatdog";
+    private int playerHP = 50;
     public int playerCurrentHP = 0;
     public int playerLuck = 9;
 
@@ -15,6 +15,8 @@ public class BS : MonoBehaviour
     public int LuckThreshold = 30;
     public int minDamage = 5;
     public int maxDamage = 10;
+
+    public Weapon gun;
 
     public string[] weapons = { "Axe", "Tsinelas", "Tinapay" };
 
