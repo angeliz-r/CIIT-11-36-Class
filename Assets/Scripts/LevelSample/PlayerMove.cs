@@ -4,14 +4,20 @@ using UnityEngine.InputSystem;
 
 public class PlayerMove : MonoBehaviour
 {
-    public Rigidbody rb;
+    public Rigidbody rb; //adds physics to our object
     public float moveSpeed;
     private Vector3 _moveDir;
     public float jumpForce;
     private bool _isGrounded;
+    //controls
     public InputActionReference move;
     public InputActionReference jump;
 
+    private void OnEnable()
+    {
+        //C# event to listen
+        jump.action.performed += Jump;
+    }
 
     // Update is called once per frame
     void Update()
@@ -26,17 +32,6 @@ public class PlayerMove : MonoBehaviour
         rb.linearVelocity = movement; //update linear velocity
     }
 
-    private void OnEnable()
-    {
-        //C# event to listen
-        jump.action.performed += Jump;
-    }
-
-    private void OnDisable()
-    {
-        //needs to be disabled since it will make a new event every time the script runs
-        jump.action.performed -= Jump;
-    }
 
     //Jump event that is being called
     private void Jump(InputAction.CallbackContext context)
@@ -55,4 +50,10 @@ public class PlayerMove : MonoBehaviour
             _isGrounded = true;
         }
     }
+    private void OnDisable()
+    {
+        //needs to be disabled since it will make a new event every time the script runs
+        jump.action.performed -= Jump;
+    }
+
 }

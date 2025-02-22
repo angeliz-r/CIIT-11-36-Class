@@ -17,7 +17,7 @@ public class EnemyCollision : MonoBehaviour
                 //destroy the object that collided with it if no lives left
                 Destroy(objectCollidedWith.gameObject);
                 //reload the scene
-                //SceneManager.LoadScene("LevelSample");
+                SceneManager.LoadScene("LevelSample");
             }
         }
     }

@@ -4,8 +4,9 @@ using UnityEngine.UIElements;
 public class SampleGameManager : MonoBehaviour
 {
     public static SampleGameManager Instance;
-    public int Score = 0;
-    public int Lives = 3;
+    [SerializeField] private int Score = 0;
+    private int Lives = 3;
+    //UI
     private VisualElement _root;
     private Label _scoreLabel;
     private Label _livesLabel;
@@ -18,8 +19,8 @@ public class SampleGameManager : MonoBehaviour
         //get the UI elements
         _root = GetComponent<UIDocument>().rootVisualElement;
         //query from the root visual element, basically look for the labels
-        _scoreLabel = _root.Q<Label>("Lives");
-        _livesLabel = _root.Q<Label>("Score");
+        _scoreLabel = _root.Q<Label>("Score");
+        _livesLabel = _root.Q<Label>("Lives");
         _statusLabel = _root.Q<Label>("Status");
     }
 

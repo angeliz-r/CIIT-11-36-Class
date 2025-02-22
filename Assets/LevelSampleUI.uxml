@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <ui:VisualElement style="flex-grow: 1;">
-        <ui:Label text="Lives: " name="Lives" style="align-self: flex-start; -unity-font-style: bold;" />
-        <ui:Label text="Score:&#10;" name="Score" style="align-self: flex-start; -unity-font-style: bold;" />
-        <ui:Label text="&#10;" name="Status" style="align-self: flex-start; -unity-font-style: bold; border-left-color: rgba(255, 228, 0, 0); border-right-color: rgba(255, 228, 0, 0); border-top-color: rgba(255, 228, 0, 0); border-bottom-color: rgba(255, 228, 0, 0);" />
+        <ui:Label text="Score:" name="Score" style="font-size: 24px;" />
+        <ui:Label text="Lives:&#10;" name="Lives" style="font-size: 24px;" />
+        <ui:Label text="Status" name="Status" style="font-size: 24px;" />
     </ui:VisualElement>
 </ui:UXML>
