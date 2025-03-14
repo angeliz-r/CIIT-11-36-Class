@@ -1,0 +1,15 @@
+Button {
+    width: 30%;
+    align-self: center;
+    background-color: rgb(68, 175, 245);
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 40px;
+}
+
+Button:hover {
+    background-color: rgb(87, 87, 87);
+    background-image: none;
+}

@@ -1,0 +1,9 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/StartScreenStyle.uss?fileID=7433441132597879392&amp;guid=10c98611a070a794fa43c147ab8f80c1&amp;type=3#StartScreenStyle" />
+    <engine:VisualElement style="flex-grow: 1; background-image: none; background-color: rgb(255, 255, 255);">
+        <engine:Label text="This Is A Title Screen" name="Title" style="-unity-font-style: bold; font-size: 100px; align-items: center; justify-content: center; align-self: center; padding-top: 50px; padding-bottom: 50px; padding-right: 10px; padding-left: 10px;" />
+        <engine:Button text="New Game&#10;" name="NewGame" class="button" style="background-image: none; background-color: rgb(87, 163, 221);" />
+        <engine:Button text="Load Game" name="LoadGame" style="background-image: none; background-color: rgb(87, 164, 222);" />
+        <engine:Button text="Exit&#10;" name="Exit" style="background-image: none; background-color: rgb(87, 164, 222);" />
+    </engine:VisualElement>
+</engine:UXML>

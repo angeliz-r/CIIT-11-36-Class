@@ -4,13 +4,16 @@ using UnityEngine.Windows;
 
 public class PlayerMove2D_IA : MonoBehaviour
 {
+    //NEW
     [SerializeField] private float _speed = 20f;
     private Vector2 _moveDir;
     private bool _flip;
 
     [SerializeField] private InputActionReference _move;
+
     private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
+
 
     private void Awake()
     {
@@ -37,7 +40,7 @@ public class PlayerMove2D_IA : MonoBehaviour
 
     private void Move()
     {
-        Vector2 movement = new Vector2(_speed * _moveDir.x, _speed * _moveDir.y);
+        Vector2 movement = new Vector2(_speed * _moveDir.x,_speed * _moveDir.y);
         _rb.linearVelocity = movement;
     }
 

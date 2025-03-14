@@ -4,8 +4,9 @@ using UnityEngine.UIElements;
 public class SampleGameManager : MonoBehaviour
 {
     public static SampleGameManager Instance;
-    [SerializeField] private int Score = 0;
+    private int Score = 0;
     private int Lives = 3;
+    private Vector3 playerPosition;
     //UI
     private VisualElement _root;
     private Label _scoreLabel;
@@ -26,15 +27,19 @@ public class SampleGameManager : MonoBehaviour
 
     private void Start()
     {
+        if (!IsNewGame())
+            LoadGame();
         //set up initial UI text on screen
         _scoreLabel.text = "Score: " + Score.ToString();
         _livesLabel.text = "Lives: " + Lives.ToString();
+
     }
 
     public void AddScore(int scoreValue)
     {
         Score += scoreValue; // add to total score
         _scoreLabel.text = "Score: " + Score.ToString(); // update the UI
+        PlayerPrefs.SetInt("score", Score); //save the data
         Debug.Log("SCORE: " + Score.ToString());
     }
 
@@ -42,13 +47,15 @@ public class SampleGameManager : MonoBehaviour
     {
         Lives -= livesValue; //subtract to total lives
         _livesLabel.text = "Lives: " + Lives.ToString(); //update the UI
-        Debug.Log("LIVES: " +  Lives.ToString());
+        PlayerPrefs.SetInt("lives", Lives); // save the data
+        Debug.Log("LIVES: " + Lives.ToString());
     }
 
     public void AddLives(int livesValue)
     {
         Lives += livesValue; // add to total lives
         _livesLabel.text = "Lives: " + Lives.ToString(); // update the UI
+        PlayerPrefs.SetInt("lives", Lives); //save the data
         Debug.Log("LIVES: " + Lives.ToString());
     }
 
@@ -56,7 +63,7 @@ public class SampleGameManager : MonoBehaviour
     {
         if (Lives <= 0)
         {
-            _statusLabel.text = "YOU LOSE!";
+            //_statusLabel.text = "YOU LOSE!";
             return true;
         }
         else
@@ -69,7 +76,46 @@ public class SampleGameManager : MonoBehaviour
     {
         if (Score >= 5)
         {
-            _statusLabel.text = "YOU WIN!";
+            //_statusLabel.text = "YOU WIN!";
         }
-    }    
+    }
+
+    void LoadGame()
+    {
+        //get save data
+        Score = PlayerPrefs.GetInt("score", 0);
+        Lives = PlayerPrefs.GetInt("lives", 0);
+
+        if (Lives <= 0) //if player died, reset values
+        {
+            Lives = 3;
+            PlayerPrefs.SetInt("lives", Lives);
+            Score = 0;
+            PlayerPrefs.SetInt("score", Score);
+            PlayerPrefs.DeleteKey("playerPositionX");
+            PlayerPrefs.DeleteKey("playerPositionY");
+            PlayerPrefs.DeleteKey("playerPositionZ");
+        }
+    }
+
+    public bool IsNewGame()
+    {
+        if (PlayerPrefs.HasKey("playerStarted"))
+        {
+            return false;
+        }
+        else
+        {
+            PlayerPrefs.SetInt("playerStarted", 1);
+            return true;
+        }
+    }
+
+    public Vector3 GetPlayerPosition()
+    {
+        playerPosition.x = PlayerPrefs.GetFloat("playerPositionX", 0);
+        playerPosition.y = PlayerPrefs.GetFloat("playerPositionY", 0);
+        playerPosition.z = PlayerPrefs.GetFloat("playerPositionZ", 0);
+        return playerPosition;
+    }
 }

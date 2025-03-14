@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour
     private Vector3 _moveDir;
     public float jumpForce;
     private bool _isGrounded;
+    private Vector3 lastPosition;
     //controls
     public InputActionReference move;
     public InputActionReference jump;
@@ -17,6 +18,15 @@ public class PlayerMove : MonoBehaviour
     {
         //C# event to listen
         jump.action.performed += Jump;
+    }
+
+    private void Start()
+    {
+        if (!SampleGameManager.Instance.IsNewGame() && PlayerPrefs.HasKey("playerPositionX"))
+        {
+            lastPosition = SampleGameManager.Instance.GetPlayerPosition();
+            this.gameObject.GetComponentInParent<Rigidbody>().position = lastPosition;
+        }
     }
 
     // Update is called once per frame

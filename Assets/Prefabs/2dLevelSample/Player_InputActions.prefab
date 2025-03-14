@@ -207,4 +207,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 20
+  _jumpForce: 5
   _move: {fileID: 1430427750926947330, guid: deeaaff01689ed64785cdf701921a2e4, type: 3}
+  _jump: {fileID: -1367740688660738245, guid: deeaaff01689ed64785cdf701921a2e4, type: 3}

@@ -3,7 +3,7 @@ using UnityEngine;
 public class ExtraLife : MonoBehaviour
 {
     public int lifeValue = 1;
-    private void OnCollisionEnter(Collision objectCollidedWith)
+    private void OnTriggerEnter(Collider objectCollidedWith)
     {
         if (objectCollidedWith.gameObject.tag == "Player")
         {
