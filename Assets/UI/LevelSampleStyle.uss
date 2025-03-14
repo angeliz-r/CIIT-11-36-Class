@@ -1,0 +1,26 @@
+.unity-button {
+    -unity-font-style: bold;
+    background-position-x: center 0;
+    background-position-y: top 0;
+    -unity-background-scale-mode: scale-to-fit;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    width: auto;
+    height: 50px;
+    background-image: url("project://database/Assets/2D%20Assets/blue_button02.png?fileID=2800000&guid=6de070e7e4f6136448badae1ad512a28&type=3#blue_button02");
+    background-color: rgba(0, 0, 0, 0);
+    align-items: flex-start;
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-self: flex-start;
+}
+
+.unity-button:hover {
+    scale: 1.2 1;
+    transition-property: scale;
+    transition-duration: 0.2s;
+    -unity-font-style: bold;
+    color: rgb(255, 255, 255);
+}

@@ -2817,6 +2817,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40c472c6827281b4cbe90f4acf7d0833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Score: 0
+  Lives: 3
 --- !u!1001 &1816121921
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3223,7 +3225,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6001973284151608355, guid: 75bd6f54c548d444b8febef40043ead2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 6001973284151608355, guid: 75bd6f54c548d444b8febef40043ead2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3231,7 +3233,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6001973284151608355, guid: 75bd6f54c548d444b8febef40043ead2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 18
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6001973284151608355, guid: 75bd6f54c548d444b8febef40043ead2, type: 3}
       propertyPath: m_LocalRotation.w

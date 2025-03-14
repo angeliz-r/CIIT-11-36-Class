@@ -1,15 +1,26 @@
-Button {
+.Button:hover {
+    background-color: rgb(87, 87, 87);
+    background-image: none;
+    -unity-font-style: bold;
+    opacity: 1;
+    scale: 1.1 1.1;
+    transition-property: scale;
+    transition-duration: 0.2s;
+}
+
+.Button {
     width: 30%;
     align-self: center;
-    background-color: rgb(68, 175, 245);
+    background-color: rgb(8, 177, 238);
     padding-top: 30px;
     padding-bottom: 30px;
     margin-top: 20px;
     margin-bottom: 20px;
     font-size: 40px;
-}
-
-Button:hover {
-    background-color: rgb(87, 87, 87);
     background-image: none;
+    overflow: visible;
+    position: relative;
+    flex-wrap: wrap;
+    -unity-font-style: normal;
+    -unity-background-scale-mode: scale-and-crop;
 }

@@ -1,17 +1,23 @@
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class SampleGameManager : MonoBehaviour
 {
     public static SampleGameManager Instance;
-    private int Score = 0;
-    private int Lives = 3;
+    [SerializeField] private int Score = 0;
+    [SerializeField]  private int Lives = 3;
+
+    private int _totalCoins;
     private Vector3 playerPosition;
     //UI
     private VisualElement _root;
     private Label _scoreLabel;
     private Label _livesLabel;
-    private Label _statusLabel;
+    private Button _mainMenu;
+
+
 
     private void OnEnable()
     {
@@ -22,7 +28,10 @@ public class SampleGameManager : MonoBehaviour
         //query from the root visual element, basically look for the labels
         _scoreLabel = _root.Q<Label>("Score");
         _livesLabel = _root.Q<Label>("Lives");
-        _statusLabel = _root.Q<Label>("Status");
+        _mainMenu = _root.Q<Button>("MainMenu");
+
+        _mainMenu = _root.Q<Button>("MainMenu");
+        _mainMenu.clicked += MainMenuClicked;
     }
 
     private void Start()
@@ -32,7 +41,13 @@ public class SampleGameManager : MonoBehaviour
         //set up initial UI text on screen
         _scoreLabel.text = "Score: " + Score.ToString();
         _livesLabel.text = "Lives: " + Lives.ToString();
+        _totalCoins = GameObject.FindGameObjectsWithTag("Coin").Length;
 
+    }
+    private void MainMenuClicked()
+    {
+        PlayerPrefs.Save();
+        SceneManager.LoadScene("StartScreen");
     }
 
     public void AddScore(int scoreValue)
@@ -63,7 +78,9 @@ public class SampleGameManager : MonoBehaviour
     {
         if (Lives <= 0)
         {
-            //_statusLabel.text = "YOU LOSE!";
+            //lose
+            PlayerPrefs.SetString("status","You Lose!");
+            SceneManager.LoadScene("EndScreen");
             return true;
         }
         else
@@ -74,9 +91,10 @@ public class SampleGameManager : MonoBehaviour
 
     public void GameWin()
     {
-        if (Score >= 5)
+        if (Score >= _totalCoins)
         {
-            //_statusLabel.text = "YOU WIN!";
+            PlayerPrefs.SetString("status", "You Win!");
+            SceneManager.LoadScene("EndScreen");
         }
     }
 
