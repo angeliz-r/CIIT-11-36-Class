@@ -3,8 +3,10 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 
+[System.Serializable]   
 public class EndMenuController : MonoBehaviour
 {
+    //THIS SCRIPT IS ATTACHED TO AN EMPY GAMEOBJECT WITH A UI DOCUMENT COMPONENT
     [SerializeField] private VisualElement _userInterface;
     [SerializeField] private Button _mainMenuButton;
     [SerializeField] private Button _exitButton;

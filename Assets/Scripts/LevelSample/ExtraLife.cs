@@ -9,6 +9,7 @@ public class ExtraLife : MonoBehaviour
         {
             Debug.Log("Adding a life!");
             SampleGameManager.Instance.AddLives(lifeValue); //add corresponding life based on value
+            AudioManager.Instance.PlaySFX("powerup");
             Destroy(this.gameObject);
         }
     }

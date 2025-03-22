@@ -22,8 +22,10 @@ public class PlayerMove : MonoBehaviour
 
     private void Start()
     {
+        //check if player is in a new game and if the player has a checkpoint hit
         if (!SampleGameManager.Instance.IsNewGame() && PlayerPrefs.HasKey("playerPositionX"))
         {
+            //if the player did hit a checkpoint, set its new position to the new player position
             lastPosition = SampleGameManager.Instance.GetPlayerPosition();
             this.gameObject.GetComponentInParent<Rigidbody>().position = lastPosition;
         }
@@ -49,6 +51,7 @@ public class PlayerMove : MonoBehaviour
         if (context.performed && _isGrounded == true) //will only trigger if player hits the jump button and if player is on the ground
         {
             Debug.Log("Jumped!");
+            AudioManager.Instance.PlaySFX("jump");
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             _isGrounded = false;
         }

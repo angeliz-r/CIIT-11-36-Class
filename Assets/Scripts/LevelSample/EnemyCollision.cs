@@ -10,6 +10,7 @@ public class EnemyCollision : MonoBehaviour
             Debug.Log("Destroying Enemy and losing a life!");
 
             SampleGameManager.Instance.SubtractLives(1);// subtract life
+            AudioManager.Instance.PlaySFX("hit");
             Destroy(this.gameObject); // destroy self
 
             if (SampleGameManager.Instance.GameOver())
