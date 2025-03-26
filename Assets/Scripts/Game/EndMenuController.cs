@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class EndMenuController : MonoBehaviour
 {
     //THIS SCRIPT IS ATTACHED TO AN EMPY GAMEOBJECT WITH A UI DOCUMENT COMPONENT
+    public bool is2dLevel;
     [SerializeField] private VisualElement _userInterface;
     [SerializeField] private Button _mainMenuButton;
     [SerializeField] private Button _exitButton;
@@ -30,8 +31,16 @@ public class EndMenuController : MonoBehaviour
     }
     private void Start()
     {
-        _winStatusLabel.text = PlayerPrefs.GetString("status");
-        _finalScoreLabel.text = "Final Score: " + PlayerPrefs.GetInt("score").ToString();
+        if (!is2dLevel)
+        {
+            _winStatusLabel.text = PlayerPrefs.GetString("status");
+            _finalScoreLabel.text = "Final Score: " + PlayerPrefs.GetInt("score").ToString();
+        }
+        else
+        {
+            _winStatusLabel.text = PlayerPrefs.GetString("status2d");
+            _finalScoreLabel.text = "Final Score: " + PlayerPrefs.GetInt("score2d").ToString();
+        }
     }
     private void OnMenuClicked()
     {

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenuController : MonoBehaviour
 {
     //THIS SCRIPT IS ATTACHED TO AN EMPY GAMEOBJECT WITH A UI DOCUMENT COMPONENT
+    [SerializeField] private string _gameSceneName;
     [SerializeField] private VisualElement _userInterface;
     [SerializeField] private Button _newGameButton;
     [SerializeField] private Button _continueButton;
@@ -40,18 +41,27 @@ public class MainMenuController : MonoBehaviour
     {
         _saveStatus.text = ""; //clear save status text if there was any text
         PlayerPrefs.DeleteAll();//clear old data/playerprefs
-        SceneManager.LoadScene("LevelSample"); //load game level as a new game
+        SceneManager.LoadScene(_gameSceneName); //load game level as a new game
     }
 
     private void OnContinueClicked()
     {
         //check if the plyer has level saved
-        if (PlayerPrefs.HasKey("playerStarted")) //check if player had previous save data
+        if (PlayerPrefs.HasKey("playerStarted") && _gameSceneName == "LevelSample") //check if player had previous save data
         {
             _saveStatus.text = ""; //clear save status text if there was any text
-            SceneManager.LoadScene("LevelSample");//load game level
+            SceneManager.LoadScene(_gameSceneName);//load game level
         }
-        else
+        else if (!PlayerPrefs.HasKey("playerStarted") && _gameSceneName == "LevelSample")
+        {
+            _saveStatus.text = "No Save Game Found";
+        }
+        else if(PlayerPrefs.HasKey("playerStarted2d") && _gameSceneName == "2DLevel")
+        {
+            _saveStatus.text = ""; //clear save status text if there was any text
+            SceneManager.LoadScene(_gameSceneName);//load game level
+        }
+        else if (!PlayerPrefs.HasKey("playerStarted2d") && _gameSceneName == "2DLevel")
         {
             _saveStatus.text = "No Save Game Found";
         }
