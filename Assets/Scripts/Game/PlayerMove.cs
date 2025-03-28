@@ -1,10 +1,12 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class PlayerMove : MonoBehaviour
 {
     public Rigidbody rb; //adds physics to our object
+    private Animator _animator;
     public float moveSpeed;
     private Vector3 _moveDir;
     public float jumpForce;
@@ -18,6 +20,7 @@ public class PlayerMove : MonoBehaviour
     {
         //C# event to listen
         jump.action.performed += Jump;
+        _animator = GetComponent<Animator>();
     }
 
     private void Start()
@@ -35,6 +38,7 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         _moveDir = move.action.ReadValue<Vector3>(); //checking if move buttons are pressed
+        IsWalking();
     }
 
     private void FixedUpdate() //fixedupdate for physics
@@ -56,7 +60,7 @@ public class PlayerMove : MonoBehaviour
             _isGrounded = false;
         }
     }
-    private void OnCollisionEnter(Collision objectCollidedWith) //check if player is on the grund
+    private void OnCollisionEnter(Collision objectCollidedWith) //check if player is on the ground
     {
         if (objectCollidedWith.gameObject.tag == "Ground")
         {
@@ -67,6 +71,14 @@ public class PlayerMove : MonoBehaviour
     {
         //needs to be disabled since it will make a new event every time the script runs
         jump.action.performed -= Jump;
+    }
+
+    private void IsWalking()
+    {
+        if (_moveDir.x > 0 || _moveDir.x < 0 || _moveDir.z > 0 || _moveDir.z < 0)
+            _animator.SetBool("IsWalking", true);
+        else if (_moveDir.x == 0 || _moveDir.x == 0 || _moveDir.z == 0 || _moveDir.z == 0)
+            _animator.SetBool("IsWalking", false);
     }
 
 }
