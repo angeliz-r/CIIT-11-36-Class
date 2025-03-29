@@ -61,7 +61,7 @@ public class SampleGameManager : MonoBehaviour
 
     public void SubtractLives(int livesValue)
     {
-        Lives -= livesValue; //subtract to total lives
+        Lives = Lives -livesValue; //subtract to total lives
         _livesLabel.text = "Lives: " + Lives.ToString(); //update the UI
         PlayerPrefs.SetInt("lives", Lives); // save the data
         Debug.Log("LIVES: " + Lives.ToString());
@@ -69,7 +69,7 @@ public class SampleGameManager : MonoBehaviour
 
     public void AddLives(int livesValue)
     {
-        Lives += livesValue; // add to total lives
+        Lives = livesValue + Lives; // add to total lives
         _livesLabel.text = "Lives: " + Lives.ToString(); // update the UI
         PlayerPrefs.SetInt("lives", Lives); //save the data
         Debug.Log("LIVES: " + Lives.ToString());
