@@ -1,0 +1,10 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <engine:VisualElement name="Contianer" style="flex-grow: 1; align-self: center; align-content: center;">
+        <engine:Label text="Select a Game to Play:" name="Title" style="align-self: center; align-items: center; -unity-font-style: bold; font-size: 77px; margin-bottom: 100px; margin-top: 50px;" />
+        <engine:VisualElement style="flex-grow: 1; align-self: auto; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; width: 1065px; height: 799px; background-image: none;">
+            <engine:Button text="2D" name="2DLevel" style="align-self: flex-start; align-content: center; align-items: flex-start; position: absolute; width: 500px; height: 700px; margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px; font-size: 128px; -unity-font-style: bold; background-image: none; background-color: rgb(15, 78, 214); transition-property: scale, ignored; transition-duration: 0.4s, 0s; transition-timing-function: ease, ease; transition-delay: 0s, 0s;" />
+            <engine:Button text="3D&#10;" name="3DLevel" style="align-self: flex-end; align-content: center; align-items: flex-end; position: absolute; max-width: none; width: 500px; height: 700px; margin-left: 10px; margin-right: 10px; margin-bottom: 10px; margin-top: 10px; -unity-font-style: bold; font-size: 128px; background-color: rgb(233, 19, 19);" />
+        </engine:VisualElement>
+        <engine:Button text="Exit" name="Exit" style="align-items: center; justify-content: center; align-self: center; align-content: auto; width: 800px; height: 50px; margin-left: 4px; margin-bottom: 35px;" />
+    </engine:VisualElement>
+</engine:UXML>

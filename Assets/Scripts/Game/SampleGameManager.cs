@@ -48,6 +48,7 @@ public class SampleGameManager : MonoBehaviour
     private void MainMenuClicked()
     {
         PlayerPrefs.Save(); //save all preferences before loadng to start screen
+        PlayerPrefs.SetInt("SceneSelect", 3);
         SceneManager.LoadScene("StartScreen"); // load the start screen
     }
 
@@ -81,6 +82,7 @@ public class SampleGameManager : MonoBehaviour
         {
             //lose
             PlayerPrefs.SetString("status","You Lose!"); //set win/lose status to carry over to End Screen
+            PlayerPrefs.SetInt("SceneSelect", 3);
             SceneManager.LoadScene("EndScreen"); // load the end screen
             return true;
         }
@@ -95,6 +97,7 @@ public class SampleGameManager : MonoBehaviour
         if (Score >= _totalCoins) //check if the score is higher than or equal to the total coins found in the level
         {
             PlayerPrefs.SetString("status", "You Win!"); //set win/lose status to carry over to End Screen
+            PlayerPrefs.SetInt("SceneSelect", 3);
             SceneManager.LoadScene("EndScreen");  // load the end screen
         }
     }

@@ -3,16 +3,17 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 
-[System.Serializable]   
+
 public class EndMenuController : MonoBehaviour
 {
     //THIS SCRIPT IS ATTACHED TO AN EMPY GAMEOBJECT WITH A UI DOCUMENT COMPONENT
-    public bool is2dLevel;
-    [SerializeField] private VisualElement _userInterface;
-    [SerializeField] private Button _mainMenuButton;
-    [SerializeField] private Button _exitButton;
-    [SerializeField] private Label _finalScoreLabel;
-    [SerializeField] private Label _winStatusLabel;
+    //public bool is2dLevel;
+    private VisualElement _userInterface;
+    private Button _mainMenuButton;
+    private Button _exitButton;
+    private Label _finalScoreLabel;
+    private Label _winStatusLabel;
+
     private void Awake()
     {
         _userInterface = GetComponent<UIDocument>().rootVisualElement;
@@ -31,12 +32,12 @@ public class EndMenuController : MonoBehaviour
     }
     private void Start()
     {
-        if (!is2dLevel)
+        if (PlayerPrefs.GetInt("SceneSelect") == 3)
         {
             _winStatusLabel.text = PlayerPrefs.GetString("status");
             _finalScoreLabel.text = "Final Score: " + PlayerPrefs.GetInt("score").ToString();
         }
-        else
+        else if (PlayerPrefs.GetInt("SceneSelect") == 2)
         {
             _winStatusLabel.text = PlayerPrefs.GetString("status2d");
             _finalScoreLabel.text = "Final Score: " + PlayerPrefs.GetInt("score2d").ToString();
@@ -45,7 +46,7 @@ public class EndMenuController : MonoBehaviour
     private void OnMenuClicked()
     {
         PlayerPrefs.DeleteAll();
-        SceneManager.LoadScene("StartScreen");
+        SceneManager.LoadScene("GameSelect");
     }
 
     private void OnExitClicked()

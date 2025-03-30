@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 public class MainMenuController : MonoBehaviour
 {
     //THIS SCRIPT IS ATTACHED TO AN EMPY GAMEOBJECT WITH A UI DOCUMENT COMPONENT
-    [SerializeField] private string _gameSceneName;
-    [SerializeField] private VisualElement _userInterface;
-    [SerializeField] private Button _newGameButton;
-    [SerializeField] private Button _continueButton;
-    [SerializeField] private Button _exitButton;
-    [SerializeField] private Label _saveStatus;
+    private string _gameSceneName;
+    private VisualElement _userInterface;
+    private Button _newGameButton;
+    private Button _continueButton;
+    private Button _exitButton;
+    private Label _saveStatus;
 
     private void Awake()
     {
@@ -26,26 +26,25 @@ public class MainMenuController : MonoBehaviour
         _newGameButton.clicked += OnNewGameClicked;
 
         _continueButton = _userInterface.Q<Button>("Continue");
-        //if (!PlayerPrefs.HasKey("playerStarted"))
-        //{
-        //    _continueButton.visible = false;
-        //}
         _continueButton.clicked += OnContinueClicked;
 
         _exitButton = _userInterface.Q<Button>("Exit");
         _exitButton.clicked += OnExitClicked;
+
         _saveStatus = _userInterface.Q<Label>("Status");
     }
 
     private void OnNewGameClicked()
     {
         _saveStatus.text = ""; //clear save status text if there was any text
+        SelectSceneCheck();
         PlayerPrefs.DeleteAll();//clear old data/playerprefs
         SceneManager.LoadScene(_gameSceneName); //load game level as a new game
     }
 
     private void OnContinueClicked()
     {
+        SelectSceneCheck();
         //check if the plyer has level saved
         if (PlayerPrefs.HasKey("playerStarted") && _gameSceneName == "LevelSample") //check if player had previous save data
         {
@@ -71,6 +70,18 @@ public class MainMenuController : MonoBehaviour
     private void OnExitClicked()
     {
         _saveStatus.text = "";
-        Application.Quit();
+        SceneManager.LoadScene("GameSelect");
+    }
+
+    private void SelectSceneCheck()
+    {
+        if (PlayerPrefs.GetInt("SceneSelect") == 2)
+        {
+            _gameSceneName = "2DLevel";
+        }
+        else if (PlayerPrefs.GetInt("SceneSelect") == 3)
+        {
+            _gameSceneName = "LevelSample";
+        }
     }
 }
