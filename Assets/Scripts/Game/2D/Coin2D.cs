@@ -7,9 +7,9 @@ public class Coin2D : MonoBehaviour
     {
         if (objectCollidedWith.gameObject.tag == "Player")
         {
-            Debug.Log("Destroying Coin! Sending Score!");
+            //Debug.Log("Destroying Coin! Sending Score!");
+            AudioManager.Instance.PlaySFX("powerup");
             GameManager2D.Instance.AddScore(coinValue); //add corresponding score based on coin value
-            GameManager2D.Instance.GameWin(); //check if you have won the game and update
             Destroy(this.gameObject);
         }
     }

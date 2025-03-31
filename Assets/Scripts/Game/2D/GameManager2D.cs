@@ -8,8 +8,6 @@ public class GameManager2D : MonoBehaviour
     [SerializeField] private int Score = 0;
     [SerializeField] private int Lives = 3;
 
-    private int _totalCoins;
-    private Vector3 playerPosition;
     //UI
     private VisualElement _root;
     private Label _scoreLabel;
@@ -39,7 +37,7 @@ public class GameManager2D : MonoBehaviour
         _scoreLabel.text = "Score: " + Score.ToString();
         _livesLabel.text = "Lives: " + Lives.ToString();
         //find the total coins to determine the win conditon
-        _totalCoins = GameObject.FindGameObjectsWithTag("Coin").Length;
+        //_totalCoins = GameObject.FindGameObjectsWithTag("Coin").Length;
 
     }
     private void MainMenuClicked()
@@ -91,12 +89,9 @@ public class GameManager2D : MonoBehaviour
 
     public void GameWin()
     {
-        if (Score >= _totalCoins) //check if the score is higher than or equal to the total coins found in the level
-        {
-            PlayerPrefs.SetString("status2d", "You Win!"); //set win/lose status to carry over to End Screen
-            PlayerPrefs.SetInt("SceneSelect", 2);
-            SceneManager.LoadScene("EndScreen");  // load the end screen
-        }
+        PlayerPrefs.SetString("status2d", "You Win!"); //set win/lose status to carry over to End Screen
+        PlayerPrefs.SetInt("SceneSelect", 2); //remember the game level
+        SceneManager.LoadScene("EndScreen");  // load the end screen
     }
 
     void LoadGame()

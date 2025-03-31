@@ -6,13 +6,12 @@ public class PlayerMove2D_IA : MonoBehaviour
 {
     //NEW INPUT SYSTEM
     [SerializeField] private float _speed = 10f;
-    [SerializeField] private float _jumpForce = 50f;
+    [SerializeField] private float _jumpForce;
     [SerializeField] private Transform _groundChecker;
     [SerializeField] private LayerMask _groundLayer;
     private Vector2 _moveDir;
     private float _horizontal;
     private bool _flip;
-
 
     [SerializeField] private InputActionReference _move;
     [SerializeField] private InputActionReference _jump;
@@ -20,9 +19,6 @@ public class PlayerMove2D_IA : MonoBehaviour
     private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
-
-
-
 
     private void Awake()
     {
@@ -42,12 +38,15 @@ public class PlayerMove2D_IA : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rb.linearVelocity = new Vector2(_speed * _moveDir.x, _moveDir.y);
+        Vector2 movement = new Vector2(_speed * _moveDir.x, _moveDir.y);
+        movement.y = _rb.linearVelocity.y;//setting the y so that the gravity stays normal and does not multiply
+        _rb.linearVelocity = movement; //update linear velocity
     }
 
     public void Move(InputAction.CallbackContext ctx)
     {
         _horizontal = ctx.ReadValue<Vector2>().x;
+
     }
 
     private void Flip()
@@ -66,8 +65,8 @@ public class PlayerMove2D_IA : MonoBehaviour
     {
         if (context.performed && IsGrounded())
         {
-            _rb.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
-            //_rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _jumpForce);
+            //_rb.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+            _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _jumpForce);
             AudioManager.Instance.PlaySFX("jump");
             _animator.SetBool("IsWalking", false);
         }
@@ -76,8 +75,8 @@ public class PlayerMove2D_IA : MonoBehaviour
 
     private bool IsGrounded()
     {
-        Debug.Log("grounded");
-        return Physics2D.OverlapCircle(_groundChecker.position, 0.2f, _groundLayer);
+        //Debug.Log("grounded");
+        return Physics2D.OverlapCircle(_groundChecker.position, 0.3f, _groundLayer);
     }
 
     private void IsWalking()

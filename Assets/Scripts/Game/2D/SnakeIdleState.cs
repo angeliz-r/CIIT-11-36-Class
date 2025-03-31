@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class SnakeIdleState : StateMachineBehaviour
 {
+    [SerializeField] private float _timeLimit;
     private float _timer;
     //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -14,7 +15,7 @@ public class SnakeIdleState : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _timer += Time.deltaTime;
-        if (_timer > 10)
+        if (_timer > _timeLimit)
         {
             animator.SetBool("IsMoving", true);
         }

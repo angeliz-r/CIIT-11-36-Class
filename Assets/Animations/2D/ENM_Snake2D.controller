@@ -65,7 +65,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f2d27b8dc2d92e4a82c564a56bab300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snakeRB: {fileID: 0}
+  _timeLimit: 3
+  _distance: 0.5
+  _speed: 5
 --- !u!114 &-4494097865141288807
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -78,6 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac9c03ef6cccf794685125820969a833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _timeLimit: 2
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0
@@ -145,7 +148,7 @@ AnimatorStateMachine:
     m_Position: {x: 300, y: 280, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8412760601043145363}
-    m_Position: {x: 350, y: 140, z: 0}
+    m_Position: {x: 410, y: 150, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

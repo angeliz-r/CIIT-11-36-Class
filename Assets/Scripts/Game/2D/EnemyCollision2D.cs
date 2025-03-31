@@ -7,7 +7,7 @@ public class EnemyCollision2D : MonoBehaviour
     {
         if (objectCollidedWith.gameObject.tag == "Player")
         {
-            Debug.Log("Destroying Enemy and losing a life!");
+            //Debug.Log("Destroying Enemy and losing a life!");
 
             GameManager2D.Instance.SubtractLives(1);// subtract life
             AudioManager.Instance.PlaySFX("hit");
@@ -17,8 +17,6 @@ public class EnemyCollision2D : MonoBehaviour
             {
                 //destroy the object that collided with it if no lives left
                 Destroy(objectCollidedWith.gameObject);
-                //leave the scene
-                SceneManager.LoadScene("EndScreen");
             }
         }
     }
