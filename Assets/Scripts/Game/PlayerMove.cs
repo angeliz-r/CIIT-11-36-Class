@@ -1,26 +1,35 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
+using UnityEngine.Rendering;
 
 public class PlayerMove : MonoBehaviour
 {
-    public Rigidbody rb; //adds physics to our object
+    public Rigidbody rb;
     private Animator _animator;
+
     public float moveSpeed;
-    private Vector3 _moveDir;
     public float jumpForce;
+    public float rotationSpeed = 4f;
+
+    private Vector3 _moveDir;
     private bool _isGrounded;
+    
     private Vector3 lastPosition;
+
     //controls
     public InputActionReference move;
     public InputActionReference jump;
+    
+    private Transform cameraMainTransform;
+   
 
     private void OnEnable()
     {
         //C# event to listen
         jump.action.performed += Jump;
         _animator = GetComponent<Animator>();
+        cameraMainTransform = Camera.main.transform;
     }
 
     private void Start()
@@ -44,8 +53,20 @@ public class PlayerMove : MonoBehaviour
     private void FixedUpdate() //fixedupdate for physics
     {
         Vector3 movement = new Vector3(_moveDir.x * moveSpeed, 0, _moveDir.z * moveSpeed);
-        movement.y = rb.linearVelocity.y;//setting the y so that the gravity stays normal and does not multiply
+        movement.y = rb.linearVelocity.y; //setting the y so that the gravity stays normal and does not multiply
         rb.linearVelocity = movement; //update linear velocity
+        
+        //camera movement
+        Vector3 cameraMove = new Vector3(_moveDir.x,0, _moveDir.z);
+        cameraMove = cameraMainTransform.forward * cameraMove.z + cameraMainTransform.right * cameraMove.x;
+        cameraMove.y = 0;
+
+        if (_moveDir != Vector3.zero)
+        {
+            float targetAngle = Mathf.Atan2(_moveDir.x,_moveDir.z) * Mathf.Rad2Deg + cameraMainTransform.eulerAngles.y;
+            Quaternion rotation = Quaternion.Euler(0f,targetAngle,0f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
+        }
     }
 
 
