@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 public class GameManager2D : MonoBehaviour
 {
     public static GameManager2D Instance;
+    public PostProcessManager postProcess;
     [SerializeField] private int Score = 0;
     [SerializeField] private int Lives = 3;
 
@@ -36,8 +37,13 @@ public class GameManager2D : MonoBehaviour
         //set up initial UI text on screen
         _scoreLabel.text = "Score: " + Score.ToString();
         _livesLabel.text = "Lives: " + Lives.ToString();
-        //find the total coins to determine the win conditon
-        //_totalCoins = GameObject.FindGameObjectsWithTag("Coin").Length;
+
+        //set post process
+        if (Lives > 1)
+            postProcess.SetDangerPostProcess(false);
+        else if (Lives == 1)
+            postProcess.SetDangerPostProcess(true);
+
 
     }
     private void MainMenuClicked()
@@ -52,7 +58,7 @@ public class GameManager2D : MonoBehaviour
         Score += scoreValue; // add to total score
         _scoreLabel.text = "Score: " + Score.ToString(); // update the UI
         PlayerPrefs.SetInt("score2d", Score); //save the data to player prefs
-        Debug.Log("SCORE: " + Score.ToString());
+       // Debug.Log("SCORE: " + Score.ToString());
     }
 
     public void SubtractLives(int livesValue)
@@ -60,7 +66,9 @@ public class GameManager2D : MonoBehaviour
         Lives -= livesValue; //subtract to total lives
         _livesLabel.text = "Lives: " + Lives.ToString(); //update the UI
         PlayerPrefs.SetInt("lives2d", Lives); // save the data
-        Debug.Log("LIVES: " + Lives.ToString());
+        if (Lives == 1)
+            postProcess.SetDangerPostProcess(true);
+        //Debug.Log("LIVES: " + Lives.ToString());
     }
 
     public void AddLives(int livesValue)
@@ -68,7 +76,9 @@ public class GameManager2D : MonoBehaviour
         Lives += livesValue; // add to total lives
         _livesLabel.text = "Lives: " + Lives.ToString(); // update the UI
         PlayerPrefs.SetInt("lives2d", Lives); //save the data
-        Debug.Log("LIVES: " + Lives.ToString());
+        if (Lives > 1)
+            postProcess.SetDangerPostProcess(false);
+        //Debug.Log("LIVES: " + Lives.ToString());
     }
 
     public bool GameOver()

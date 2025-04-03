@@ -42,7 +42,7 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Playing " + _selectedSFX.name);
+           // Debug.Log("Playing " + _selectedSFX.name);
             _sfxSource.PlayOneShot(_selectedSFX.clip);
         }
     }
