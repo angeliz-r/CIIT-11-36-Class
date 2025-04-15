@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SnakeMovingState : StateMachineBehaviour
 {
-    [SerializeField] private float _timeLimit;
+    private float _timeLimit;
     [SerializeField] private float _distance;
     private float _timer;
     [SerializeField] private float _speed;
@@ -16,7 +16,8 @@ public class SnakeMovingState : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _timer = 0;
-        _speed = 5;
+        _speed = Random.Range(5, 8); //randomize speed
+        _timeLimit = Random.Range(2, 5); //randomize time limit
         _isRight = true;
         _snakeRB = animator.GetComponent<Rigidbody2D>();
         _snakeSprite = animator.GetComponent<SpriteRenderer>();

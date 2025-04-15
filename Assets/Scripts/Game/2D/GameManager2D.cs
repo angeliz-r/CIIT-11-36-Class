@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -14,11 +15,13 @@ public class GameManager2D : MonoBehaviour
     private Label _scoreLabel;
     private Label _livesLabel;
     private Button _mainMenu;
+    private Button _mute;
+    private bool _muteToggled;
 
     private void OnEnable()
     {
         Instance = this; //create a running instance of Sample Game Manager
-
+        _muteToggled = false;
         //get the UI elements
         _root = GetComponent<UIDocument>().rootVisualElement;
         //query from the root visual element, basically look for the labels
@@ -26,14 +29,35 @@ public class GameManager2D : MonoBehaviour
         _livesLabel = _root.Q<Label>("Lives");
         _mainMenu = _root.Q<Button>("MainMenu");
         _mainMenu.clicked += MainMenuClicked;
+        _mute = _root.Q<Button>("Sound");
+        _mute.clicked += MuteClicked;
     }
 
-    private void Start()
+    private void MuteClicked()
+    {
+        if (_muteToggled)
+        {
+            _mute.text = "SOUND: ON";
+            _muteToggled = false;
+        }
+        else
+        {
+            _mute.text = "SOUND: OFF";
+            _muteToggled = true;
+        }
+        AudioManager.Instance.ToggleSound();
+    }
+    private void Awake()
     {
         //when game level is loaded, check if there is existing playerprefs
         if (!IsNewGame())
             LoadGame(); //if it is not a new game, load the existing playerprefs data
+        else if (IsNewGame())
+            PlayerPrefs.SetInt("playerStarted2d", 1); // 1 in this context means TRUE
+    }
 
+    private void Start()
+    {
         //set up initial UI text on screen
         _scoreLabel.text = "Score: " + Score.ToString();
         _livesLabel.text = "Lives: " + Lives.ToString();
@@ -127,7 +151,6 @@ public class GameManager2D : MonoBehaviour
         }
         else
         {
-            PlayerPrefs.SetInt("playerStarted2d", 1); // 1 in this context means TRUE
             return true;
         }
     }

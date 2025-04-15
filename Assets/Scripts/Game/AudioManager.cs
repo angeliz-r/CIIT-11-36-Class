@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 
 public class AudioManager : MonoBehaviour
@@ -9,8 +10,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] public Sound[] sfxSoundList;
     public Sound music;
     private Sound _selectedSFX;
+    public AudioMixer mixer;
     [SerializeField] private AudioSource _sfxSource;
     [SerializeField] private AudioSource _musicSource;
+    private bool _toggle;
 
     public void Awake()
     {
@@ -19,6 +22,15 @@ public class AudioManager : MonoBehaviour
 
     public void Start()
     {
+        _toggle = true;
+        if (PlayerPrefs.HasKey("BGM"))
+        {
+            mixer.SetFloat("SFX", PlayerPrefs.GetFloat("BGM"));
+        }
+        if (PlayerPrefs.HasKey("SFX"))
+        {
+            mixer.SetFloat("SFX", PlayerPrefs.GetFloat("SFX"));
+        }
         PlayMusic();
     }
     public void PlayMusic()
@@ -47,5 +59,37 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+
+    public void AdjustBGMVol (float vol)
+    {
+        mixer.SetFloat("BGM", Mathf.Log10(vol) * 20);
+        PlayerPrefs.SetFloat("BGM", vol);
+    }
+
+    public void AdjustSFXVol(float vol)
+    {
+        mixer.SetFloat("SFX", Mathf.Log10(vol) * 20);
+        PlayerPrefs.SetFloat("SFX", vol);
+    }
+
+    public void ToggleSound()
+    {
+        if (_toggle)
+        {
+            //mixer.SetFloat("Master", 0);
+            _musicSource.mute = true;
+            _sfxSource.mute = true;
+            _toggle = !_toggle;
+        }
+        else
+        {
+            //mixer.SetFloat("Master", 5);
+            _musicSource.mute = false;
+            _sfxSource.mute = false;
+            _toggle = !_toggle;
+        }
+
+    }
 }
+
 

@@ -32,25 +32,29 @@ public class EndMenuController : MonoBehaviour
     }
     private void Start()
     {
-        if (PlayerPrefs.GetInt("SceneSelect") == 3)
-        {
-            _winStatusLabel.text = PlayerPrefs.GetString("status");
-            _finalScoreLabel.text = "Final Score: " + PlayerPrefs.GetInt("score").ToString();
-        }
-        else if (PlayerPrefs.GetInt("SceneSelect") == 2)
-        {
-            _winStatusLabel.text = PlayerPrefs.GetString("status2d");
-            _finalScoreLabel.text = "Final Score: " + PlayerPrefs.GetInt("score2d").ToString();
-        }
+        _winStatusLabel.text = PlayerPrefs.GetString("status2d");
+        _finalScoreLabel.text = PlayerPrefs.GetInt("score2d").ToString();
+        //if (PlayerPrefs.GetInt("SceneSelect") == 3)
+        //{
+        //    _winStatusLabel.text = PlayerPrefs.GetString("status");
+        //    _finalScoreLabel.text = "Final Score: " + PlayerPrefs.GetInt("score").ToString();
+        //}
+        //else if (PlayerPrefs.GetInt("SceneSelect") == 2)
+        //{
+        //    _winStatusLabel.text = PlayerPrefs.GetString("status2d");
+        //    _finalScoreLabel.text = PlayerPrefs.GetInt("score2d").ToString();
+        //}
     }
     private void OnMenuClicked()
     {
+        AudioManager.Instance.PlaySFX("button");
         PlayerPrefs.DeleteAll();
-        SceneManager.LoadScene("GameSelect");
+        SceneManager.LoadScene("StartScreen");
     }
 
     private void OnExitClicked()
     {
+        AudioManager.Instance.PlaySFX("button");
         PlayerPrefs.DeleteAll();
         Application.Quit();
     }

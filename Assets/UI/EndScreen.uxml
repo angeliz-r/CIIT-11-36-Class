@@ -1,9 +1,10 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/StartScreenStyle.uss?fileID=7433441132597879392&amp;guid=10c98611a070a794fa43c147ab8f80c1&amp;type=3#StartScreenStyle" />
-    <engine:VisualElement name="Panel" style="flex-grow: 1; background-image: none; background-color: rgb(255, 255, 255);">
-        <engine:Label text="This Is A Title Screen" name="WinStatus" style="-unity-font-style: bold; font-size: 100px; align-items: center; justify-content: center; align-self: center; padding-top: 50px; padding-bottom: 50px; padding-right: 10px; padding-left: 10px;" />
-        <engine:Label text="Final Score: 00" name="FinalScore" style="-unity-font-style: bold; font-size: 50px; align-items: center; justify-content: center; align-self: center; padding-top: 10px; padding-bottom: 20px; padding-right: 10px; padding-left: 10px;" />
-        <engine:Button text="Back to Main Menu" name="MainMenu" class="Button" style="background-image: none; background-color: rgb(255, 255, 255);" />
-        <engine:Button text="Exit&#10;" name="Exit" class="Button" style="background-image: none; background-color: rgb(255, 255, 255);" />
+    <Style src="project://database/Assets/UI/ButtonStyle.uss?fileID=7433441132597879392&amp;guid=100c1bf942cb0ab418aaa3c94383dfb7&amp;type=3#ButtonStyle" />
+    <engine:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/2D%20Assets/UI%20Assets/BG.png?fileID=2800000&amp;guid=b7dfc934ab3dccc4d85bf0097fd479a9&amp;type=3#BG&quot;); -unity-background-image-tint-color: rgb(63, 63, 63);">
+        <engine:Label text="You Win!" name="WinStatus" style="align-self: center; align-items: center; -unity-font-definition: url(&quot;project://database/Assets/Thaleah_PixelFont/Materials/ThaleahFat_TTF.ttf?fileID=12800000&amp;guid=585188cdc4600544eb408bee749e4b3a&amp;type=3#ThaleahFat_TTF&quot;); font-size: 161px; color: rgb(255, 255, 255);" />
+        <engine:Label text="Final Score:" name="ScoreLabel" style="color: rgb(255, 255, 255); -unity-font-definition: url(&quot;project://database/Assets/Thaleah_PixelFont/Materials/ThaleahFat_TTF.ttf?fileID=12800000&amp;guid=585188cdc4600544eb408bee749e4b3a&amp;type=3#ThaleahFat_TTF&quot;); -unity-text-align: upper-center; font-size: 59px; margin-bottom: -28px;" />
+        <engine:Label text="0000&#10;" name="FinalScore" style="color: rgb(255, 255, 255); -unity-font-definition: url(&quot;project://database/Assets/Thaleah_PixelFont/Materials/ThaleahFat_TTF.ttf?fileID=12800000&amp;guid=585188cdc4600544eb408bee749e4b3a&amp;type=3#ThaleahFat_TTF&quot;); -unity-text-align: upper-center; font-size: 161px;" />
+        <engine:Button text="Back to Main Menu" name="MainMenu" />
+        <engine:Button text="Exit Game" name="Exit" />
     </engine:VisualElement>
 </engine:UXML>

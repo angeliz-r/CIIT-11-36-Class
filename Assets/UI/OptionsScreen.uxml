@@ -1,0 +1,12 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/ButtonStyle.uss?fileID=7433441132597879392&amp;guid=100c1bf942cb0ab418aaa3c94383dfb7&amp;type=3#ButtonStyle" />
+    <engine:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/2D%20Assets/UI%20Assets/BG.png?fileID=2800000&amp;guid=b7dfc934ab3dccc4d85bf0097fd479a9&amp;type=3#BG&quot;); -unity-background-image-tint-color: rgb(96, 96, 96);">
+        <engine:Label text="Options" name="Title" style="align-items: center; align-self: center; -unity-font-style: bold; -unity-font-definition: url(&quot;project://database/Assets/Thaleah_PixelFont/Materials/ThaleahFat_TTF.ttf?fileID=12800000&amp;guid=585188cdc4600544eb408bee749e4b3a&amp;type=3#ThaleahFat_TTF&quot;); color: rgb(255, 255, 255); font-size: 199px;" />
+        <engine:VisualElement style="flex-grow: 1; align-self: center; justify-content: flex-start; max-width: 80%; min-width: 60%;">
+            <engine:Slider label="BGM Volume : " value="0.5" high-value="1" name="BGM" fill="true" />
+            <engine:Slider label="SFX Volume : " value="0.5" high-value="1" name="SFX" fill="true" />
+            <engine:DropdownField label="Resolution: " name="ResOptions" style="font-size: 40px; color: rgb(255, 255, 255);" />
+        </engine:VisualElement>
+        <engine:Button text="Back&#10;" name="Back" />
+    </engine:VisualElement>
+</engine:UXML>

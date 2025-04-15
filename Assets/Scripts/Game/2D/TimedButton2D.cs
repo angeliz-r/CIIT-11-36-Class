@@ -1,15 +1,20 @@
+using TMPro;
 using UnityEngine;
 
 public class TimedButton2D : MonoBehaviour
 {
     [SerializeField] private float _timeLimit;
     [SerializeField] private GameObject[] _HiddenObjects;
+    [SerializeField] private TextMeshProUGUI _timerNum;
     private float _timer;
     private Animator _animator;
     private bool _startTime;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _timer = _timeLimit;
+        _timerNum.text = "";
         _animator = GetComponent<Animator>();
         _startTime = false;
         foreach (GameObject obj in _HiddenObjects)
@@ -23,7 +28,8 @@ public class TimedButton2D : MonoBehaviour
     {
         if (_startTime)
         {
-            _timer += Time.deltaTime;
+            _timer -= Time.deltaTime;
+            _timerNum.text = _timer.ToString("0");
             ActivateButton();
         }
     }
@@ -44,7 +50,7 @@ public class TimedButton2D : MonoBehaviour
         {
             obj.SetActive(true);
         }
-        if (_timer > _timeLimit)
+        if (_timer < 0)
         {
             AudioManager.Instance.PlaySFX("lazer");
             _animator.SetBool("IsPressed", false);
@@ -53,7 +59,8 @@ public class TimedButton2D : MonoBehaviour
                 obj.SetActive(false);
             }
             _startTime = false;
-            _timer = 0;
+            _timerNum.text = "";
+            _timer = _timeLimit;
         }
     }
 }
