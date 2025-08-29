@@ -2,10 +2,8 @@ using UnityEngine;
 
 public class PlayerMove2D : MonoBehaviour
 {
-    //OLD
     [SerializeField] private float _speed = 20f; //serializefield while keeping values private is best practice
-    private bool _flip;
-    
+    [SerializeField] private float _jumpForce = 8f;
     private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
 
@@ -19,33 +17,29 @@ public class PlayerMove2D : MonoBehaviour
     {
         Move();
         Flip();
-
-        //Look for which buttons were pressed
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            _flip = true;
-        }
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            _flip = false;
-        }
+        Jump();
     }
 
     private void Move()
     {
         float inputX = Input.GetAxis("Horizontal");
-        float inputY = Input.GetAxis("Vertical");
-
-        Vector2 movement = new Vector2(_speed * inputX, _speed * inputY);
+        Vector2 movement = new Vector2(_speed * inputX, _rb.linearVelocity.y);
         _rb.linearVelocity = movement;
+    }
+    private void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, _jumpForce);
+        }
     }
     private void Flip()
     {
-        if (_flip)
+        if (_rb.linearVelocity.x < 0)
         {
             _spriteRenderer.flipX = true;
         }
-        else
+        else if (_rb.linearVelocity.x > 0)
         {
             _spriteRenderer.flipX = false;
         }
